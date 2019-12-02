@@ -57,7 +57,7 @@ namespace webapi.Controllers
         [AllowAnonymous]
         public ActionResult UserLogin([FromBody] LoginCredential user)
         {
-            User fUser = _database.getUsers().Find(s => s.UserName.Equals(user.username));
+            User fUser = _database.getUsers().Find(s => s.UserName.Equals(user.username) && s.Password.Equals(user.password));
             if(fUser != null) return Ok(fUser);
             return StatusCode(501);
         }
