@@ -8,6 +8,8 @@ namespace webapi.Models
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Appoinment> Appoinments { get; set; }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         { }
@@ -15,6 +17,7 @@ namespace webapi.Models
         public List<User> getUsers () => Users.ToList();
 
         public List<Doctor> getDoctors() => Doctors.ToList();
+        public List<Appoinment> getAppoinments() => Appoinments.ToList();
 
         public void AddUser(User user)
         { 
@@ -26,6 +29,20 @@ namespace webapi.Models
         public void AddDoctor(Doctor doctor)
         {
             Doctors.Add(doctor);
+            this.SaveChanges();
+            return;
+        }
+
+        public void AddPatient(Patient patient)
+        {
+            Patients.Add(patient);
+            this.SaveChanges();
+            return;
+        }
+
+        public void AddAppoinment(Appoinment appoinment)
+        {
+            Appoinments.Add(appoinment);
             this.SaveChanges();
             return;
         }

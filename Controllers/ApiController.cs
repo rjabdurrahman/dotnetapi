@@ -24,8 +24,12 @@ namespace webapi.Controllers
         public List<User> GetAllUsers() => _database.getUsers();
 
         [HttpGet]
-        [Route("doctors")]
+        [Route("doctor")]
         public List<Doctor> GetAllDoctors() => _database.getDoctors();
+
+        [HttpGet]
+        [Route("appoinment")]
+        public List<Appoinment> GetAppoinments() => _database.getAppoinments();
 
         [HttpPost]
         [Route("user")]
@@ -45,6 +49,26 @@ namespace webapi.Controllers
             _logger.LogInformation("Add Doctor for DoctorId: {DoctorId}", doctor.DoctorId);
             _database.AddDoctor(doctor);
             return Ok(doctor);
+        }
+
+        [HttpPost]
+        [Route("patient")]
+        [AllowAnonymous]
+        public IActionResult AddPatient([FromBody] Patient patient)
+        {
+            _logger.LogInformation("Add Doctor for DoctorId: {PatientId}", patient.PatientId);
+            _database.AddPatient(patient);
+            return Ok(patient);
+        }
+
+        [HttpPost]
+        [Route("appoinment")]
+        [AllowAnonymous]
+        public IActionResult AddAppoinment([FromBody] Appoinment appoinment)
+        {
+            _logger.LogInformation("Added Appoinment");
+            _database.AddAppoinment(appoinment);
+            return Ok(appoinment);
         }
 
         public class LoginCredential {
