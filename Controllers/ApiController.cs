@@ -31,6 +31,10 @@ namespace webapi.Controllers
         [Route("appoinment")]
         public List<Appoinment> GetAppoinments() => _database.getAppoinments();
 
+        [HttpGet]
+        [Route("pappoinment")]
+        public List<PatientAppoinment> GetPAppoinments() => _database.getPAppoinments();
+
         [HttpPost]
         [Route("user")]
         [AllowAnonymous]
