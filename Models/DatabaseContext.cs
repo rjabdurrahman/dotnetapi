@@ -14,13 +14,13 @@ namespace webapi.Models
         public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
         { }
 
-        public List<User> getUsers () => Users.ToList();
+        public List<User> getUsers() => Users.ToList();
 
         public List<Doctor> getDoctors() => Doctors.ToList();
         public List<Appoinment> getAppoinments() => Appoinments.ToList();
 
         public void AddUser(User user)
-        { 
+        {
             Users.Add(user);
             this.SaveChanges();
             return;

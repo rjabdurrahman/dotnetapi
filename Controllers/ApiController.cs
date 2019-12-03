@@ -71,7 +71,8 @@ namespace webapi.Controllers
             return Ok(appoinment);
         }
 
-        public class LoginCredential {
+        public class LoginCredential
+        {
             public string username { get; set; }
             public string password { get; set; }
         }
@@ -82,7 +83,7 @@ namespace webapi.Controllers
         public ActionResult UserLogin([FromBody] LoginCredential user)
         {
             User fUser = _database.getUsers().Find(s => s.UserName.Equals(user.username) && s.Password.Equals(user.password));
-            if(fUser != null) return Ok(fUser);
+            if (fUser != null) return Ok(fUser);
             return StatusCode(501);
         }
 
