@@ -24,6 +24,10 @@ namespace webapi.Controllers
         public List<User> GetAllUsers() => _database.getUsers();
 
         [HttpGet]
+        [Route("emp")]
+        public List<Employee> GetAllEmployees() => _database.getEmployee();
+
+        [HttpGet]
         [Route("doctor")]
         public List<Doctor> GetAllDoctors() => _database.getDoctors();
 
@@ -43,6 +47,28 @@ namespace webapi.Controllers
             _logger.LogInformation("Add User for UserId: {UserId}", user.UserId);
             _database.AddUser(user);
             return Ok(user);
+        }
+
+        [HttpPost]
+        [Route("emp")]
+        [AllowAnonymous]
+        public IActionResult AddEmp([FromBody] Employee em)
+        {
+            _logger.LogInformation("Add Em");
+            _database.AddEmployee(em);
+            return Ok(em);
+        }
+
+        [HttpGet]
+        [Route("uemp/{id}")]
+        public IActionResult UpdateEmp(int id)
+        {
+            Employee Empl = _database.getEmployee().Find((Employee e) => e.DeptId == id);
+            // System.Diagnostics.Debug.WriteLine(Empl);
+            Empl.EmpSalary = Empl.EmpSalary + Empl.EmpSalary * .5;
+            _database.Update(Empl);
+            _database.SaveChanges();
+            return Ok(Empl);
         }
 
         [HttpPost]
