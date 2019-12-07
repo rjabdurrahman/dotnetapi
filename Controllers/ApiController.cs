@@ -36,8 +36,14 @@ namespace webapi.Controllers
         public List<Appoinment> GetAppoinments() => _database.getAppoinments();
 
         [HttpGet]
+        [Route("pdocs")]
+        public List<PatientDoctor> GetPDocs() => _database.getPDocs();
+
+
+        [HttpGet]
         [Route("appoinment/{id}/{pres}")]
-        public IActionResult AppoinmentsUpdate(int id, string pres) {
+        public IActionResult AppoinmentsUpdate(int id, string pres)
+        {
             Appoinment ap = _database.getAppoinments().Find((Appoinment a) => a.AppoinmentId == id);
             // System.Diagnostics.Debug.WriteLine(Empl);
             ap.Prescription = pres;
